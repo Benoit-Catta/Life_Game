@@ -58,4 +58,9 @@ public class Fenetre extends JFrame{
 			}
 		}
 	}
+	
+	public void reset() {
+		this.dispose();
+		Fenetre f = new Fenetre(50,50);
+	}
 }
