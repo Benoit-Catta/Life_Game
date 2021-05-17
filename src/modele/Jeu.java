@@ -138,4 +138,48 @@ public class Jeu {
 	public int getLargeur() {
 		return this.largeur;
 	}
+	
+	public String[] toStringJeu() {
+		String[] monJeu = new String[3];
+		monJeu[0] = this.longueur + "\n";
+		monJeu[1] = this.largeur + "\n";
+		int compteurVivant = 0;
+		int compteurMort = 0;
+		monJeu[2] = "";
+		for(int i = 0 ; i < longueur ; i++ ) {
+			for(int c = 0 ; c < longueur ; c++ ) {
+				if(c == 0 && zone[i][c].getEtat()) {
+					monJeu[2] = monJeu[2] + "0/";
+					compteurVivant++;
+				} else {
+					if(zone[i][c].getEtat()) {
+						compteurVivant++;
+						if(compteurMort != 0) {
+							monJeu[2] = monJeu[2] + compteurMort + "/";
+							compteurMort = 0;
+						}
+					}
+					if(!zone[i][c].getEtat()) {
+						compteurMort++;
+						if(compteurVivant != 0) {
+							monJeu[2] = monJeu[2] + compteurVivant + "/";
+							compteurVivant = 0;
+						}
+					}
+				}
+			}
+			if(compteurMort != 0) {
+				monJeu[2] = monJeu[2] + compteurMort + "/";
+				compteurMort = 0;
+			} else {
+				if(compteurVivant != 0) {
+					monJeu[2] = monJeu[2] + compteurVivant + "/";
+					compteurVivant = 0;
+				}
+			}
+			monJeu[2] = monJeu[2] + "\n";
+		}
+		return monJeu;
+	}
+	
 }
